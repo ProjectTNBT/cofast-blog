@@ -13,32 +13,32 @@ export type Database = {
         Row: {
           created_at: string
           id: number
-          postId: number | null
-          tagId: number | null
+          post_id: number | null
+          tag_id: number | null
         }
         Insert: {
           created_at?: string
           id?: number
-          postId?: number | null
-          tagId?: number | null
+          post_id?: number | null
+          tag_id?: number | null
         }
         Update: {
           created_at?: string
           id?: number
-          postId?: number | null
-          tagId?: number | null
+          post_id?: number | null
+          tag_id?: number | null
         }
         Relationships: [
           {
-            foreignKeyName: "public_post_tags_postId_fkey"
-            columns: ["postId"]
+            foreignKeyName: "public_post_tags_post_id_fkey"
+            columns: ["post_id"]
             isOneToOne: false
             referencedRelation: "posts"
             referencedColumns: ["id"]
           },
           {
-            foreignKeyName: "public_post_tags_tagId_fkey"
-            columns: ["tagId"]
+            foreignKeyName: "public_post_tags_tag_id_fkey"
+            columns: ["tag_id"]
             isOneToOne: false
             referencedRelation: "tags"
             referencedColumns: ["id"]
@@ -49,7 +49,7 @@ export type Database = {
         Row: {
           author: string | null
           content: string | null
-          coverImage: string | null
+          cover_image: string | null
           created_at: string
           id: number
           modified_at: string | null
@@ -60,7 +60,7 @@ export type Database = {
         Insert: {
           author?: string | null
           content?: string | null
-          coverImage?: string | null
+          cover_image?: string | null
           created_at?: string
           id?: number
           modified_at?: string | null
@@ -71,7 +71,7 @@ export type Database = {
         Update: {
           author?: string | null
           content?: string | null
-          coverImage?: string | null
+          cover_image?: string | null
           created_at?: string
           id?: number
           modified_at?: string | null
@@ -85,17 +85,17 @@ export type Database = {
         Row: {
           created_at: string
           id: number
-          tagName: string | null
+          name: string | null
         }
         Insert: {
           created_at?: string
           id?: number
-          tagName?: string | null
+          name?: string | null
         }
         Update: {
           created_at?: string
           id?: number
-          tagName?: string | null
+          name?: string | null
         }
         Relationships: []
       }

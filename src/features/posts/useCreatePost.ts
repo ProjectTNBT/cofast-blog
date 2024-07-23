@@ -6,14 +6,14 @@ import toast from 'react-hot-toast';
 
 type mutateFcProps = {
   newPost: newPostData;
-  tagIds: number[];
+  tag_ids: number[];
 };
 
 export function useCreatePost() {
   const queryClient = useQueryClient();
 
   const { mutate: createPost, isPending } = useMutation({
-    mutationFn: ({ newPost, tagIds }: mutateFcProps) => createNewPostApi(newPost, tagIds),
+    mutationFn: ({ newPost, tag_ids }: mutateFcProps) => createNewPostApi(newPost, tag_ids),
     onSuccess: () => {
       toast.success('New post successfully created.');
       queryClient.invalidateQueries({

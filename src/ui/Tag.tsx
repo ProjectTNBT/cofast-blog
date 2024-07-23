@@ -93,7 +93,7 @@ function Tag({ tag, withDel, count }: { tag: TagProps; withDel?: boolean; count?
             <GoTrash />
           </button>
         ) : null}
-        <span>{tag.tagName}</span>
+        <span>{tag.name}</span>
         {count ? (
           tag.postCount ? (
             <PostCount>{tag.postCount}</PostCount>

@@ -34,11 +34,11 @@ export async function fetchPosts({ sortBy, page, postByPage }: FetchPostsArgs) {
   }
 
   let { data: post_tags, error: error2 } = await supabase.from('post_tags').select(`
-    postId,
+    post_id,
     tags (
       id,
       created_at,
-      tagName
+      name
     )
   `);
 
@@ -50,7 +50,7 @@ export async function fetchPosts({ sortBy, page, postByPage }: FetchPostsArgs) {
   const postsWithTags = [];
   if (!post_tags || !posts) return;
   for (let post of posts) {
-    const postTags = post_tags.filter((postTag) => postTag.postId === post.id);
+    const postTags = post_tags.filter((postTag) => postTag.post_id === post.id);
     const tags = postTags.map((postTag) => postTag.tags);
     postsWithTags.push({ ...post, tags: tags });
   }
@@ -75,15 +75,15 @@ export async function fetchPost(slug: string) {
 
 type NewPost = newPostDataType;
 
-export async function createNewPost(newPost: NewPost, tagIds: number[]) {
+export async function createNewPost(newPost: NewPost, tag_ids: number[]) {
   // image path,url
-  if (typeof newPost.coverImage == 'string') return;
-  const imageName = `${Math.random()}-${newPost.coverImage.name}`.replaceAll('/', '');
+  if (typeof newPost.cover_image == 'string') return;
+  const imageName = `${Math.random()}-${newPost.cover_image.name}`.replaceAll('/', '');
   const imageUrl = `${supabaseUrl}/storage/v1/object/public/post-images/${imageName}`;
 
   const imgUrlAddedNewPost = {
     ...newPost,
-    coverImage: imageUrl
+    cover_image: imageUrl
   };
 
   // insert newPost
@@ -100,16 +100,16 @@ export async function createNewPost(newPost: NewPost, tagIds: number[]) {
   // if there is no error on creating post upload image
   const { error: uploadImgError } = await supabase.storage
     .from('post-images')
-    .upload(imageName, newPost.coverImage);
+    .upload(imageName, newPost.cover_image);
 
   if (uploadImgError) throw new Error('An error occurred while uploading the image.');
 
   // post tags relation
-  const newPostId = newCreatedPost[0].id;
+  const newpost_id = newCreatedPost[0].id;
 
-  const postTags = tagIds.map((tagId: number) => ({
-    postId: newPostId,
-    tagId
+  const postTags = tag_ids.map((tag_id: number) => ({
+    post_id: newpost_id,
+    tag_id: tag_id
   }));
 
   const { error: tagInsertError } = await supabase.from('post_tags').insert(postTags);
@@ -120,21 +120,10 @@ export async function createNewPost(newPost: NewPost, tagIds: number[]) {
   }
 }
 
-export async function deletePost(postId: number) {
-  // delete post tags relation
-  const { error: postTagRelationError } = await supabase
-    .from('post_tags')
-    .delete()
-    .eq('postId', postId);
-  // console.log(data);
-  if (postTagRelationError) {
-    console.log(postTagRelationError.message);
-    throw new Error('Posts could not be deleted.');
-  }
-
+export async function deletePost(post_id: number) {
   // if there is no error
   // delete post
-  const { error } = await supabase.from('posts').delete().eq('id', postId);
+  const { error } = await supabase.from('posts').delete().eq('id', post_id);
 
   if (error) {
     console.log(error.message);
@@ -142,13 +131,13 @@ export async function deletePost(postId: number) {
   }
 }
 
-export async function editPost(newPost: NewPost, postId: number, tagIds: number[]) {
+export async function editPost(newPost: NewPost, post_id: number, tag_ids: number[]) {
   let imageName;
   let imageUrl;
 
   // image path,url
-  if (typeof newPost.coverImage !== 'string') {
-    imageName = `${Math.random()}-${newPost.coverImage.name}`.replaceAll('/', '');
+  if (typeof newPost.cover_image !== 'string') {
+    imageName = `${Math.random()}-${newPost.cover_image.name}`.replaceAll('/', '');
     imageUrl = `${supabaseUrl}/storage/v1/object/public/post-images/${imageName}`;
   }
 
@@ -156,13 +145,13 @@ export async function editPost(newPost: NewPost, postId: number, tagIds: number[
 
   const imgUrlAddedNewPost = {
     ...newPost,
-    coverImage: imageUrl
+    cover_image: imageUrl
   };
 
   const { data: editedPost, error: editedPostError } = await supabase
     .from('posts')
     .update({ ...imgUrlAddedNewPost, modified_at: new Date().toISOString() })
-    .eq('id', postId)
+    .eq('id', post_id)
     .select();
 
   if (editedPostError) {
@@ -175,24 +164,24 @@ export async function editPost(newPost: NewPost, postId: number, tagIds: number[
   if (imageName) {
     const { error: uploadImgError } = await supabase.storage
       .from('post-images')
-      .upload(imageName, newPost.coverImage);
+      .upload(imageName, newPost.cover_image);
 
     if (uploadImgError) throw new Error('An error occurred while uploading the image.');
   }
 
   // // edit tags
   // if exists
-  const editedPostId = editedPost[0].id;
+  const editedpost_id = editedPost[0].id;
 
   // let { data: isPostExistOnPostTags } = await supabase
   //   .from('post_tags')
-  //   .select('postId', { head: true }) // Explicitly specify the type for select()
-  //   .eq('postId', editedPostId);
+  //   .select('post_id', { head: true }) // Explicitly specify the type for select()
+  //   .eq('post_id', editedpost_id);
 
   let { data: isPostExistOnPostTags } = await supabase
     .from('post_tags')
     .select('*') // Select all columns
-    .eq('postId', editedPostId);
+    .eq('post_id', editedpost_id);
 
   // delete previous post_tags relation
 
@@ -200,7 +189,7 @@ export async function editPost(newPost: NewPost, postId: number, tagIds: number[
     const { error: postTagRelationError } = await supabase
       .from('post_tags')
       .delete()
-      .eq('postId', editedPostId);
+      .eq('post_id', editedpost_id);
 
     if (postTagRelationError) {
       console.log(postTagRelationError.message);
@@ -209,9 +198,9 @@ export async function editPost(newPost: NewPost, postId: number, tagIds: number[
   }
 
   // add new post_tags relation
-  const postTags = tagIds.map((tagId: number) => ({
-    postId: editedPostId,
-    tagId
+  const postTags = tag_ids.map((tag_id: number) => ({
+    post_id: editedpost_id,
+    tag_id: tag_id
   }));
 
   const { error: editedTagsError } = await supabase.from('post_tags').insert(postTags).select();
@@ -230,8 +219,8 @@ export async function fetchPostTags() {
   return post_tags;
 }
 
-export async function createRelation({ postId, tagId }: { postId: number; tagId: number }) {
-  const { error } = await supabase.from('post_tags').insert([{ postId: postId, tagId }]);
+export async function createRelation({ post_id, tag_id }: { post_id: number; tag_id: number }) {
+  const { error } = await supabase.from('post_tags').insert([{ post_id: post_id, tag_id: tag_id }]);
 
   if (error) {
     console.log(error);

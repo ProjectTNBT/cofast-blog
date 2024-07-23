@@ -29,12 +29,12 @@ const StyledImage = styled.img`
 type PostSuggestionCardProps = PostType;
 
 function PostSuggestionCard({ post }: { post: PostSuggestionCardProps }) {
-  const { title, slug, author, created_at, coverImage } = post;
+  const { title, slug, author, created_at, cover_image } = post;
 
   return (
     <StyledPostSuggestionCard>
       <Link to={`/blog/${slug}`} state={{ post }}>
-        <StyledImage loading='lazy' src={coverImage!} alt={title!} width='200px' height='200px' />
+        <StyledImage loading='lazy' src={cover_image!} alt={title!} width='200px' height='200px' />
       </Link>
 
       <Content>

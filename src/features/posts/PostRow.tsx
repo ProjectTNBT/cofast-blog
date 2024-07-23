@@ -76,7 +76,7 @@ const EditPostFormContainer = styled.div`
 `;
 
 function PostRow({ post, index }: PostRowProps) {
-  const { id: postId, created_at, modified_at, title, author } = post;
+  const { id: post_id, created_at, modified_at, title, author } = post;
   const [modalOpen, setModalOpen] = useState<boolean>(false);
   const [deleteModalOpen, setDeleteModalOpen] = useState<boolean>(false);
   const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
@@ -115,7 +115,7 @@ function PostRow({ post, index }: PostRowProps) {
 
   // post operations
   const handleDelete = () => {
-    deletePost(postId);
+    deletePost(post_id);
   };
 
   return (

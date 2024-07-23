@@ -7,8 +7,8 @@ export function useEditPost() {
   const queryClient = useQueryClient();
 
   const { mutate: editPost, isPending: isPostEditing } = useMutation({
-    mutationFn: ({ newEditPost, editPostId, tagIds }: any) =>
-      editPostApi(newEditPost, editPostId, tagIds),
+    mutationFn: ({ newEditPost, editpost_id, tag_ids }: any) =>
+      editPostApi(newEditPost, editpost_id, tag_ids),
     onSuccess: () => {
       toast.success('Post succesfully edited.'),
         queryClient.invalidateQueries({

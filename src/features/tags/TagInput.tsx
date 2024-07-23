@@ -26,7 +26,7 @@ function TagInput({ isCreating }: TagInputProps) {
     if (tags) {
       const newSuggestions = tags?.map((tag) => ({
         value: tag.id,
-        label: tag.tagName as string
+        label: tag.name as string
       }));
       setSuggestions(newSuggestions);
     } else {

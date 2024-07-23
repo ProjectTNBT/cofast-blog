@@ -171,7 +171,7 @@ function Post() {
           {isPending ? (
             <Skeleton height={450} />
           ) : (
-            <img src={post.coverImage || ''} alt={post.title || ''} />
+            <img src={post.cover_image || ''} alt={post.title || ''} />
           )}
         </Image>
       </figure>

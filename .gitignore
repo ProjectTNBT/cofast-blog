@@ -25,6 +25,8 @@ dist-ssr
 
 # env
 .env*local
+.env
+.npmrc
 
 #netlify
 netlify.toml

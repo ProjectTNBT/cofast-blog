@@ -10,8 +10,8 @@ export type PostWithTags = Post & {
 
 export type newPostData = Omit<
   Post,
-  'coverImage' | 'id' | 'created_at' | 'modified_at' | 'tags'
-> & { coverImage: File | string };
+  'cover_image' | 'id' | 'created_at' | 'modified_at' | 'tags'
+> & { cover_image: File | string };
 
 export type TagWithCount = Tag & {
   postCount?: number;

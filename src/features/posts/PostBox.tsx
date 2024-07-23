@@ -70,13 +70,13 @@ type PostProps = {
 };
 
 function PostBox({ post }: PostProps) {
-  const { created_at, title, slug, summary, coverImage, author, tags } = post;
+  const { created_at, title, slug, summary, cover_image, author, tags } = post;
 
   return (
     <StyledPostBox>
       <figure>
         <Link to={`/blog/${slug}`}>
-          <StyledImage src={coverImage as string} alt={title as string} loading='lazy' />
+          <StyledImage src={cover_image as string} alt={title as string} loading='lazy' />
         </Link>
       </figure>
 

@@ -43,7 +43,7 @@ export async function uploadFakeData({ post, tags }: { post: any; tags: string[]
 
   for (let addedTag of addedTags) {
     console.log(' ');
-    createRelation({ postId: addedPost[0].id, tagId: addedTag.id });
+    createRelation({ post_id: addedPost[0].id, tag_id: addedTag.id });
   }
 }
 

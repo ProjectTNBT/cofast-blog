@@ -53,12 +53,12 @@ function CreatePostForm({ postToEdit, tagsToEdit }: CreatePostFormProps) {
       ? {
           title: postToEdit?.title,
           content: postToEdit?.content,
-          coverImage: postToEdit?.coverImage,
+          cover_image: postToEdit?.cover_image,
           summary: postToEdit?.summary,
           tags: tagsToEdit?.map((tag) => {
             return {
               value: tag.id,
-              label: tag.tagName
+              label: tag.name
             };
           })
         }
@@ -70,12 +70,12 @@ function CreatePostForm({ postToEdit, tagsToEdit }: CreatePostFormProps) {
   const { errors } = formState;
 
   function onSubmit(data: FieldValues) {
-    const img = data.coverImage[0];
+    const img = data.cover_image[0];
 
     if (isEditingSession) {
-      const tagIds = [];
+      const tag_ids = [];
       for (let tag of data.tags) {
-        tagIds.push(tag.value);
+        tag_ids.push(tag.value);
       }
 
       const newEditPost = {
@@ -84,11 +84,11 @@ function CreatePostForm({ postToEdit, tagsToEdit }: CreatePostFormProps) {
         summary: data.summary,
         content: data.content,
         author: author,
-        coverImage: img
+        cover_image: img
       };
 
       editPost(
-        { newEditPost, editPostId: postToEdit?.id, tagIds },
+        { newEditPost, editpost_id: postToEdit?.id, tag_ids },
         {
           onSuccess: () => {
             reset(getValues());
@@ -102,15 +102,15 @@ function CreatePostForm({ postToEdit, tagsToEdit }: CreatePostFormProps) {
         summary: data.summary,
         content: data.content,
         author: author,
-        coverImage: img ? img : 'null'
+        cover_image: img ? img : 'null'
       };
 
-      const tagIds = data.tags
+      const tag_ids = data.tags
         .filter((tag: Tag) => typeof tag.value === 'number' || typeof tag.value === 'string')
         .map((tag: Tag) => parseInt(tag.value as string));
 
       createPost(
-        { newPost, tagIds },
+        { newPost, tag_ids },
         {
           onSuccess: () => {
             reset(getValues());
@@ -144,9 +144,9 @@ function CreatePostForm({ postToEdit, tagsToEdit }: CreatePostFormProps) {
             />
           </FormRow>
 
-          <FormRow label='Add a cover photo' error={errors?.coverImage?.message}>
+          <FormRow label='Add a cover photo' error={errors?.cover_image?.message}>
             <Controller
-              name='coverImage'
+              name='cover_image'
               control={control}
               rules={{ required: 'This field is required.' }}
               render={({ field }) => (

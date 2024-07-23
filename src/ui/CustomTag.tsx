@@ -4,7 +4,7 @@ function CustomTag({ classNames, tag, ...tagProps }: any) {
   return (
     <button type='button' className={classNames.tag} {...tagProps}>
       <RxCross1 />
-      <span className={classNames.tagName}>{tag.label}</span>
+      <span className={classNames.name}>{tag.label}</span>
     </button>
   );
 }

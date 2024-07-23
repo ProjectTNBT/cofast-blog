@@ -39,7 +39,7 @@ function RecentPost({ post }: { post: RecentPostProps }) {
   return (
     <StyledRecentPost>
       <Link to={`/blog/${post.slug}`} state={{ post }}>
-        <Image src={post.coverImage as string} />
+        <Image src={post.cover_image as string} />
       </Link>
       <StyledLink to={`/blog/${post.slug}`} state={{ post }}>
         {post.title}

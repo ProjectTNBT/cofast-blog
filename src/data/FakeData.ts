@@ -21,7 +21,7 @@ export const FakePostData = [
       content: `
 
           `,
-      coverImage:
+      cover_image:
         'https://pwavskqtxdeplljoxovq.supabase.co/storage/v1/object/public/post-images/0.945528553489954-pexels-pixabay-87009.jpg',
       slug: 'exploring-the-lunar-frontier-a-journey-to-the-moon',
       summary:
@@ -49,7 +49,7 @@ export const FakePostData = [
       
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. At quo, dignissimos sequi voluptates ipsum nesciunt asperiores nihil? Doloremque voluptates excepturi non vitae laudantium. Expedita architecto, necessitatibus quos maxime doloremque placeat voluptates tempora velit, numquam assumenda, nam consequatur veritatis nesciunt fuga fugiat. Laudantium cumque aperiam autem.
     `,
-      coverImage:
+      cover_image:
         'https://pwavskqtxdeplljoxovq.supabase.co/storage/v1/object/public/post-images/0.693209219748518-jeremy-perkins-UgNjyPkphtU-unsplash.jpg',
       slug: 'unraveling-black-holes-cosmic-mysteries',
       summary:
@@ -80,7 +80,7 @@ export const FakePostData = [
       
       
     `,
-      coverImage:
+    cover_image:
         'https://pwavskqtxdeplljoxovq.supabase.co/storage/v1/object/public/post-images/0.693209219748518-jeremy-perkins-UgNjyPkphtU-unsplash.jpg',
       slug: 'unraveling-nuclear-energy-power-perils-and-safety',
       summary:
@@ -110,7 +110,7 @@ export const FakePostData = [
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. At quo, dignissimos sequi voluptates ipsum nesciunt asperiores nihil? Doloremque voluptates excepturi non vitae laudantium. Expedita architecto, necessitatibus quos maxime doloremque placeat voluptates tempora velit, numquam assumenda, nam consequatur veritatis nesciunt fuga fugiat. Laudantium cumque aperiam autem.
       
       `,
-      coverImage:
+      cover_image:
         'https://pwavskqtxdeplljoxovq.supabase.co/storage/v1/object/public/post-images/0.544858567544793-iStock-490376259.jpg',
       slug: 'exploring-cloning-from-science-fiction-to-medical-breakthroughs',
       summary:
@@ -139,7 +139,7 @@ export const FakePostData = [
             
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. At quo, dignissimos sequi voluptates ipsum nesciunt asperiores nihil? Doloremque voluptates excepturi non vitae laudantium. Expedita architecto, necessitatibus quos maxime doloremque placeat voluptates tempora velit, numquam assumenda, nam consequatur veritatis nesciunt fuga fugiat. Laudantium cumque aperiam autem.
     `,
-      coverImage:
+    cover_image:
         'https://pwavskqtxdeplljoxovq.supabase.co/storage/v1/object/public/post-images/0.22170279755487576-ultra-detailed-nebula-abstract-wallpaper-4.jpg',
       slug: 'unveiling-the-mysteries-of-space-a-voyage-into-the-unknown',
       summary:

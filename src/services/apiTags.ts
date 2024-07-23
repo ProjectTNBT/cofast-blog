@@ -51,7 +51,7 @@ export async function fetchTagsWithoutPagination() {
 
 export async function addTags(newTags: string[]) {
   const insertingData = newTags.map((tag) => ({
-    tagName: tag
+    name: tag
   }));
 
   const { data, error } = await supabase.from('tags').insert(insertingData).select();
@@ -64,24 +64,24 @@ export async function addTags(newTags: string[]) {
   return data;
 }
 
-export async function fetchRelatedTag(postId: any) {
+export async function fetchRelatedTag(post_id: any) {
   const { data: selectedTagsData, error: error1 } = await supabase
     .from('post_tags')
     .select('*')
-    .eq('postId', postId);
+    .eq('post_id', post_id);
 
   if (error1) {
     console.log(error1.message);
     throw new Error('The related tag id/ids could not be fetched.');
   }
 
-  const selectedTagIds = selectedTagsData?.map((selectedTagData) => selectedTagData.tagId);
+  const selectedtag_ids = selectedTagsData?.map((selectedTagData) => selectedTagData.tag_id);
 
   // get matching tags
   let { data: relatedTags, error: error2 } = await supabase
     .from('tags')
     .select('*')
-    .in('id', selectedTagIds);
+    .in('id', selectedtag_ids);
 
   if (error2) {
     console.log(error2.message);
@@ -91,9 +91,9 @@ export async function fetchRelatedTag(postId: any) {
   return relatedTags;
 }
 
-export async function deleteTag(tagId: number) {
+export async function deleteTag(tag_id: number) {
   // delete post_tag relation
-  const { error } = await supabase.from('post_tags').delete().eq('tagId', tagId);
+  const { error } = await supabase.from('post_tags').delete().eq('tag_id', tag_id);
 
   if (error) {
     console.log(error.message);
@@ -101,7 +101,7 @@ export async function deleteTag(tagId: number) {
   }
 
   // delete tag
-  const { error: error2 } = await supabase.from('tags').delete().eq('id', tagId);
+  const { error: error2 } = await supabase.from('tags').delete().eq('id', tag_id);
 
   if (error2) {
     console.log(error2.message);

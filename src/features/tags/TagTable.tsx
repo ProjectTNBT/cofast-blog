@@ -16,8 +16,8 @@ function TagTable() {
   const tagsPostCount: { [key: number]: number } = {};
   if (tag_posts) {
     for (let tag_post of tag_posts) {
-      if (tag_post && typeof tag_post.tagId === 'number') {
-        tagsPostCount[tag_post.tagId] = (tagsPostCount[tag_post.tagId] || 0) + 1;
+      if (tag_post && typeof tag_post.tag_id === 'number') {
+        tagsPostCount[tag_post.tag_id] = (tagsPostCount[tag_post.tag_id] || 0) + 1;
       }
     }
   }

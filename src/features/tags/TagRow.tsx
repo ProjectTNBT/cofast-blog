@@ -16,14 +16,14 @@ const Soft = styled.div`
 `;
 
 function TagRow({ tag, index }: TagRowProps) {
-  const { created_at, tagName, postCount } = tag;
+  const { created_at, name, postCount } = tag;
 
   return (
     <Table.Row>
       <div>{index !== undefined ? index + 1 : '-'}</div>
 
       <Soft>{dateFormatter(created_at as string)}</Soft>
-      <div>{tagName}</div>
+      <div>{name}</div>
       <div>{postCount}</div>
     </Table.Row>
   );
