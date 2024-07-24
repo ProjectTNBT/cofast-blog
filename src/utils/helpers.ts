@@ -16,11 +16,11 @@ export const secondDateFormatter = (date: string) => {
 export async function imageUploadHandler(image: File) {
   const imageName = `${Math.random()}-${image.name}`.replaceAll('/', '');
 
-  const { error } = await supabase.storage.from('post-images').upload(imageName, image);
+  const { error } = await supabase.storage.from('blog').upload(imageName, image);
 
   if (error) throw new Error('An error occurred while uploading the image.');
 
-  const imageUrl = `${supabaseUrl}/storage/v1/object/public/post-images/${imageName}`;
+  const imageUrl = `${supabaseUrl}/storage/v1/object/public/blog/${imageName}`;
 
   return imageUrl;
 }

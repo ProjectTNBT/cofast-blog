@@ -79,7 +79,7 @@ export async function createNewPost(newPost: NewPost, tag_ids: number[]) {
   // image path,url
   if (typeof newPost.cover_image == 'string') return;
   const imageName = `${Math.random()}-${newPost.cover_image.name}`.replaceAll('/', '');
-  const imageUrl = `${supabaseUrl}/storage/v1/object/public/post-images/${imageName}`;
+  const imageUrl = `${supabaseUrl}/storage/v1/object/public/blog/${imageName}`;
 
   const imgUrlAddedNewPost = {
     ...newPost,
@@ -99,7 +99,7 @@ export async function createNewPost(newPost: NewPost, tag_ids: number[]) {
 
   // if there is no error on creating post upload image
   const { error: uploadImgError } = await supabase.storage
-    .from('post-images')
+    .from('blog')
     .upload(imageName, newPost.cover_image);
 
   if (uploadImgError) throw new Error('An error occurred while uploading the image.');
@@ -138,7 +138,7 @@ export async function editPost(newPost: NewPost, post_id: number, tag_ids: numbe
   // image path,url
   if (typeof newPost.cover_image !== 'string') {
     imageName = `${Math.random()}-${newPost.cover_image.name}`.replaceAll('/', '');
-    imageUrl = `${supabaseUrl}/storage/v1/object/public/post-images/${imageName}`;
+    imageUrl = `${supabaseUrl}/storage/v1/object/public/blog/${imageName}`;
   }
 
   // edit post
@@ -163,7 +163,7 @@ export async function editPost(newPost: NewPost, post_id: number, tag_ids: numbe
 
   if (imageName) {
     const { error: uploadImgError } = await supabase.storage
-      .from('post-images')
+      .from('blog')
       .upload(imageName, newPost.cover_image);
 
     if (uploadImgError) throw new Error('An error occurred while uploading the image.');
